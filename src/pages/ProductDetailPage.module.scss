@@ -1,0 +1,293 @@
+@use '../styles/variables' as *;
+
+.page {
+  padding-top: $space-6;
+  padding-bottom: $space-16;
+}
+
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $text-sm;
+  color: $color-ink-muted;
+  margin-bottom: $space-6;
+  transition: color $transition-fast;
+
+  &:hover { color: $color-ink; }
+}
+
+// ─── Two-column layout ────────────────────────────────────────────────────────
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-12;
+  align-items: start;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+    gap: $space-6;
+  }
+}
+
+// ─── Gallery ──────────────────────────────────────────────────────────────────
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  position: sticky;
+  top: calc(#{$nav-height} + #{$space-6});
+}
+
+.mainImageWrap {
+  background: $color-surface-alt;
+  border-radius: $radius-lg;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: $space-8;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.thumbRail {
+  display: flex;
+  gap: $space-2;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: $space-1;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.thumb {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  border-radius: $radius-sm;
+  border: 2px solid $color-border;
+  background: $color-surface-alt;
+  overflow: hidden;
+  transition: border-color $transition-fast;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: $space-2;
+  }
+
+  &:hover { border-color: $color-border-dark; }
+
+  &.thumbActive {
+    border-color: $color-ink;
+  }
+}
+
+// ─── Info panel ───────────────────────────────────────────────────────────────
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+  padding-top: $space-2;
+}
+
+.category {
+  font-size: $text-xs;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $color-ink-muted;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: $text-2xl;
+  font-weight: $weight-medium;
+  line-height: $leading-tight;
+  color: $color-ink;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: $text-xl;
+  }
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: $space-3;
+}
+
+.price {
+  font-size: $text-xl;
+  font-weight: $weight-semibold;
+  color: $color-ink;
+}
+
+.salePrice {
+  font-size: $text-xl;
+  font-weight: $weight-semibold;
+  color: $color-accent;
+  // This is the sale (lower) price; original (.price) gets struck
+  order: -1;
+}
+
+// When sale exists, original price becomes muted + struck
+.priceRow:has(.salePrice) .price {
+  font-size: $text-base;
+  font-weight: $weight-regular;
+  color: $color-ink-muted;
+  text-decoration: line-through;
+}
+
+.saleBadge {
+  font-size: $text-xs;
+  font-weight: $weight-semibold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: $color-accent;
+  padding: $space-1 $space-2;
+  border-radius: $radius-sm;
+  align-self: center;
+}
+
+.stockLow {
+  font-size: $text-sm;
+  color: $color-warning;
+  font-weight: $weight-medium;
+}
+
+.stockOut {
+  font-size: $text-sm;
+  color: $color-error;
+  font-weight: $weight-medium;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid $color-border;
+}
+
+.variantBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.ctaRow {
+  display: flex;
+  gap: $space-3;
+  align-items: stretch;
+
+  @media (max-width: 420px) {
+    flex-direction: column;
+  }
+}
+
+.addBtn {
+  flex: 1;
+  padding: 0 $space-6;
+  height: 44px;
+  background: $color-ink;
+  color: #fff;
+  font-size: $text-sm;
+  font-weight: $weight-semibold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: $radius-sm;
+  transition: background $transition-fast;
+
+  &:hover:not(:disabled) { background: $color-accent; }
+
+  &:disabled {
+    background: $color-surface-alt;
+    color: $color-ink-subtle;
+    cursor: not-allowed;
+  }
+}
+
+// ─── Description ─────────────────────────────────────────────────────────────
+.description {}
+
+.descTitle {
+  font-size: $text-sm;
+  font-weight: $weight-semibold;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: $color-ink-muted;
+  margin-bottom: $space-3;
+}
+
+.descText {
+  font-size: $text-base;
+  line-height: $leading-loose;
+  color: $color-ink-muted;
+}
+
+// ─── Rating ──────────────────────────────────────────────────────────────────
+.rating {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.ratingStars {
+  color: $color-warning;
+  letter-spacing: 0.05em;
+}
+
+.ratingCount {
+  font-size: $text-sm;
+  color: $color-ink-muted;
+}
+
+// ─── Toast ────────────────────────────────────────────────────────────────────
+.toast {
+  position: fixed;
+  bottom: $space-8;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: $color-ink;
+  color: #fff;
+  font-size: $text-sm;
+  font-weight: $weight-medium;
+  padding: $space-3 $space-6;
+  border-radius: $radius-full;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-base, transform $transition-base;
+  z-index: 300;
+
+  &.toastVisible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+// ─── Error ────────────────────────────────────────────────────────────────────
+.error {
+  padding: $space-16;
+  text-align: center;
+  color: $color-ink-muted;
+
+  p { margin-bottom: $space-4; }
+}
+
+.errorLink {
+  color: $color-accent;
+  font-weight: $weight-medium;
+
+  &:hover { text-decoration: underline; }
+}

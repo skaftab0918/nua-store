@@ -1,0 +1,128 @@
+@use '../../styles/variables' as *;
+
+.card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow $transition-base, border-color $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    border-color: $color-border-dark;
+  }
+
+  &:hover .image {
+    transform: scale(1.03);
+  }
+
+  &:hover .quickAdd {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.imageLink {
+  display: block;
+  overflow: hidden;
+}
+
+.imageWrap {
+  position: relative;
+  background: $color-surface-alt;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: $space-6;
+  transition: transform 0.4s ease;
+}
+
+.body {
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  flex: 1;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.category {
+  font-size: $text-xs;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-ink-muted;
+}
+
+.titleLink {
+  display: block;
+
+  &:hover .title {
+    color: $color-accent;
+  }
+}
+
+.title {
+  font-size: $text-sm;
+  font-weight: $weight-medium;
+  line-height: $leading-normal;
+  color: $color-ink;
+  transition: color $transition-fast;
+
+  // Two-line clamp
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: $space-2;
+}
+
+.price {
+  font-size: $text-base;
+  font-weight: $weight-semibold;
+  color: $color-ink;
+}
+
+.quickAdd {
+  font-size: $text-xs;
+  font-weight: $weight-semibold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: $color-accent;
+  padding: $space-2 $space-3;
+  border: 1px solid $color-accent;
+  border-radius: $radius-sm;
+  background: transparent;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity $transition-base, transform $transition-base, background $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: $color-accent;
+    color: #fff;
+  }
+
+  @media (hover: none) {
+    // Always visible on touch devices
+    opacity: 1;
+    transform: none;
+  }
+}
