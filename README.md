@@ -2,7 +2,7 @@
 
 A mini e-commerce web app built with React 18, SCSS Modules, and Vite.
 
-**Live URL:** 
+**Live URL: https://nua-store-eight.vercel.app/** 
 
 ---
 
